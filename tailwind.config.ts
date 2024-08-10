@@ -18,19 +18,6 @@ const config = {
             },
         },
         extend: {
-            colors: {
-                primary: {
-                    start: "#3A8EF6",
-                    end: "#6F3AFA ",
-                },
-                secondary: "#00BFA5",
-                third: "red",
-                para: "#6c87a3",
-            },
-            fontFamily: {
-                poppins: ["Poppins", "sans-serif"],
-                sora: ["Sora", "sans-serif"],
-            },
             keyframes: {
                 "accordion-down": {
                     from: { height: "0" },
