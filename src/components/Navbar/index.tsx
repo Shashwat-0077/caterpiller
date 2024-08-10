@@ -12,7 +12,7 @@ export default function Navbar() {
     // BUG : Navbar is not sticky
 
     return (
-        <nav className="sticky flex h-screen shrink-0 basis-80 flex-col justify-between bg-gray-100 px-7 py-7">
+        <nav className="sticky left-0 top-0 flex h-screen shrink-0 basis-80 flex-col justify-between bg-gray-100 px-7 py-7">
             <section>
                 <h1 className="text-2xl font-semibold">Trucky</h1>
                 <ul className="pt-2">

@@ -42,7 +42,11 @@ const FormSchema = z
         }
     });
 
-export function ExteriorForm() {
+type PropTypes = {
+    active?: boolean;
+};
+
+export function ExteriorForm({ active }: PropTypes) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -58,102 +62,107 @@ export function ExteriorForm() {
     }
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onFormSubmit)}
-                className="space-y-6 px-2"
-            >
-                <FormField
-                    control={form.control}
-                    name="rustDentDamage"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Rust/Dent/Damage</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+        <div id="exterior" className={active ? "" : "blur-md"}>
+            <h1 className="pb-7 text-center text-2xl font-semibold">
+                Exterior
+            </h1>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onFormSubmit)}
+                    className="space-y-7 px-2"
+                >
+                    <FormField
+                        control={form.control}
+                        name="rustDentDamage"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Rust/Dent/Damage</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="Y">Yes</SelectItem>
+                                        <SelectItem value="N">No</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="oilLeakSuspension"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Oil Leak/Suspension</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="Y">Yes</SelectItem>
+                                        <SelectItem value="N">No</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="overallSummary"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Overall Summary</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select condition" />
-                                    </SelectTrigger>
+                                    <Textarea
+                                        placeholder="Summary of the exterior inspection..."
+                                        {...field}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="Y">Yes</SelectItem>
-                                    <SelectItem value="N">No</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="oilLeakSuspension"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Oil Leak/Suspension</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="images"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Images</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select condition" />
-                                    </SelectTrigger>
+                                    <Input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={(e) => {
+                                            const files = Array.from(
+                                                e.target.files || [],
+                                            ).map((file) =>
+                                                URL.createObjectURL(file),
+                                            );
+                                            field.onChange(files);
+                                        }}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="Y">Yes</SelectItem>
-                                    <SelectItem value="N">No</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="overallSummary"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Overall Summary</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Summary of the exterior inspection..."
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="images"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Images</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(e) => {
-                                        const files = Array.from(
-                                            e.target.files || [],
-                                        ).map((file) =>
-                                            URL.createObjectURL(file),
-                                        );
-                                        field.onChange(files);
-                                    }}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </div>
     );
 }

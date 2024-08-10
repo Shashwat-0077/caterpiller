@@ -53,7 +53,11 @@ const FormSchema = z.object({
     images: z.array(z.string().url()).optional(),
 });
 
-export function TireForm() {
+type PropTypes = {
+    active?: boolean;
+};
+
+export function TireForm({ active }: PropTypes) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -75,22 +79,222 @@ export function TireForm() {
     }
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onFormSubmit)}
-                className="space-y-6 px-2"
-            >
-                <div className="flex gap-4">
+        <div id="tire" className={active ? "" : "blur-md"}>
+            <h1 className="pb-7 text-center text-2xl font-semibold">Tire</h1>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onFormSubmit)}
+                    className="space-y-6 px-2"
+                >
+                    <div className="flex gap-4">
+                        <FormField
+                            control={form.control}
+                            name="leftFrontPressure"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Left Front Pressure</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            type="number"
+                                            placeholder="30"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rightFrontPressure"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Right Front Pressure</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            type="number"
+                                            placeholder="30"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="flex gap-4">
+                        <FormField
+                            control={form.control}
+                            name="leftFrontCondition"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Left Front Condition</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a verified email to display" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Good">
+                                                Good
+                                            </SelectItem>
+                                            <SelectItem value="Ok">
+                                                Ok
+                                            </SelectItem>
+                                            <SelectItem value="Needs Replacement">
+                                                Needs Replacement
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rightFrontCondition"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Right Front Condition</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a verified email to display" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Good">
+                                                Good
+                                            </SelectItem>
+                                            <SelectItem value="Ok">
+                                                Ok
+                                            </SelectItem>
+                                            <SelectItem value="Needs Replacement">
+                                                Needs Replacement
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="flex gap-4">
+                        <FormField
+                            control={form.control}
+                            name="leftRearPressure"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Left Rear Pressure</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            type="number"
+                                            placeholder="30"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rightRearPressure"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Right Rear Pressure</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            type="number"
+                                            placeholder="30"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="flex gap-4">
+                        <FormField
+                            control={form.control}
+                            name="leftRearCondition"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Left Rear Condition</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a verified email to display" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Good">
+                                                Good
+                                            </SelectItem>
+                                            <SelectItem value="Ok">
+                                                Ok
+                                            </SelectItem>
+                                            <SelectItem value="Needs Replacement">
+                                                Needs Replacement
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rightRearCondition"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Right Rear Condition</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a verified email to display" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Good">
+                                                Good
+                                            </SelectItem>
+                                            <SelectItem value="Ok">
+                                                Ok
+                                            </SelectItem>
+                                            <SelectItem value="Needs Replacement">
+                                                Needs Replacement
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <FormField
                         control={form.control}
-                        name="leftFrontPressure"
+                        name="overallSummary"
                         render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Left Front Pressure</FormLabel>
+                            <FormItem>
+                                <FormLabel>Overall Summary</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="30"
+                                    <Textarea
+                                        placeholder="Summary of the inspection..."
                                         {...field}
                                     />
                                 </FormControl>
@@ -100,221 +304,32 @@ export function TireForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="rightFrontPressure"
+                        name="images"
                         render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Right Front Pressure</FormLabel>
+                            <FormItem>
+                                <FormLabel>Images</FormLabel>
                                 <FormControl>
                                     <Input
-                                        type="number"
-                                        placeholder="30"
-                                        {...field}
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={(e) => {
+                                            const files = Array.from(
+                                                e.target.files || [],
+                                            ).map((file) =>
+                                                URL.createObjectURL(file),
+                                            );
+                                            field.onChange(files);
+                                        }}
                                     />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                </div>
-                <div className="flex gap-4">
-                    <FormField
-                        control={form.control}
-                        name="leftFrontCondition"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Left Front Condition</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a verified email to display" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Good">
-                                            Good
-                                        </SelectItem>
-                                        <SelectItem value="Ok">Ok</SelectItem>
-                                        <SelectItem value="Needs Replacement">
-                                            Needs Replacement
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="rightFrontCondition"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Right Front Condition</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a verified email to display" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Good">
-                                            Good
-                                        </SelectItem>
-                                        <SelectItem value="Ok">Ok</SelectItem>
-                                        <SelectItem value="Needs Replacement">
-                                            Needs Replacement
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className="flex gap-4">
-                    <FormField
-                        control={form.control}
-                        name="leftRearPressure"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Left Rear Pressure</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="30"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="rightRearPressure"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Right Rear Pressure</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="30"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className="flex gap-4">
-                    <FormField
-                        control={form.control}
-                        name="leftRearCondition"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Left Rear Condition</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a verified email to display" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Good">
-                                            Good
-                                        </SelectItem>
-                                        <SelectItem value="Ok">Ok</SelectItem>
-                                        <SelectItem value="Needs Replacement">
-                                            Needs Replacement
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="rightRearCondition"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Right Rear Condition</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a verified email to display" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Good">
-                                            Good
-                                        </SelectItem>
-                                        <SelectItem value="Ok">Ok</SelectItem>
-                                        <SelectItem value="Needs Replacement">
-                                            Needs Replacement
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <FormField
-                    control={form.control}
-                    name="overallSummary"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Overall Summary</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Summary of the inspection..."
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="images"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Images</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(e) => {
-                                        const files = Array.from(
-                                            e.target.files || [],
-                                        ).map((file) =>
-                                            URL.createObjectURL(file),
-                                        );
-                                        field.onChange(files);
-                                    }}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </div>
     );
 }

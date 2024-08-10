@@ -40,7 +40,11 @@ const EngineFormSchema = z.object({
     images: z.array(z.string().url()).optional(),
 });
 
-export function EngineForm() {
+type PropTypes = {
+    active?: boolean;
+};
+
+export function EngineForm({ active }: PropTypes) {
     const form = useForm<z.infer<typeof EngineFormSchema>>({
         resolver: zodResolver(EngineFormSchema),
         defaultValues: {
@@ -60,222 +64,237 @@ export function EngineForm() {
     }
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onFormSubmit)}
-                className="space-y-6 px-2"
-            >
-                <FormField
-                    control={form.control}
-                    name="rustDentDamage"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Rust/Dent Damage</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+        <div id="engine" className={active ? "" : "blur-md"}>
+            <h1 className="pb-7 text-center text-2xl font-semibold">Engine</h1>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onFormSubmit)}
+                    className="space-y-6 px-2"
+                >
+                    <FormField
+                        control={form.control}
+                        name="rustDentDamage"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Rust/Dent Damage</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select rust/dent damage" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {YesNoEnum.map((value) => (
+                                            <SelectItem
+                                                key={value}
+                                                value={value}
+                                            >
+                                                {value}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="oilCondition"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Oil Condition</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select oil condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {OilConditionEnum.map((condition) => (
+                                            <SelectItem
+                                                key={condition}
+                                                value={condition}
+                                            >
+                                                {condition}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="oilColor"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Oil Color</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select oil color" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {OilColorEnum.map((color) => (
+                                            <SelectItem
+                                                key={color}
+                                                value={color}
+                                            >
+                                                {color}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="brakeFluidCondition"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Brake Fluid Condition</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select brake fluid condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {OilConditionEnum.map((condition) => (
+                                            <SelectItem
+                                                key={condition}
+                                                value={condition}
+                                            >
+                                                {condition}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="brakeFluidColor"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Brake Fluid Color</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select brake fluid color" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {OilColorEnum.map((color) => (
+                                            <SelectItem
+                                                key={color}
+                                                value={color}
+                                            >
+                                                {color}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="oilLeak"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Oil Leak</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select oil leak status" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {YesNoEnum.map((value) => (
+                                            <SelectItem
+                                                key={value}
+                                                value={value}
+                                            >
+                                                {value}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="overallSummary"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Overall Summary</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select rust/dent damage" />
-                                    </SelectTrigger>
+                                    <Textarea
+                                        placeholder="Summary of the inspection..."
+                                        {...field}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    {YesNoEnum.map((value) => (
-                                        <SelectItem key={value} value={value}>
-                                            {value}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="oilCondition"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Oil Condition</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="images"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Images</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select oil condition" />
-                                    </SelectTrigger>
+                                    <Input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={(e) => {
+                                            const files = Array.from(
+                                                e.target.files || [],
+                                            ).map((file) =>
+                                                URL.createObjectURL(file),
+                                            );
+                                            field.onChange(files);
+                                        }}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    {OilConditionEnum.map((condition) => (
-                                        <SelectItem
-                                            key={condition}
-                                            value={condition}
-                                        >
-                                            {condition}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="oilColor"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Oil Color</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select oil color" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {OilColorEnum.map((color) => (
-                                        <SelectItem key={color} value={color}>
-                                            {color}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="brakeFluidCondition"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Brake Fluid Condition</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select brake fluid condition" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {OilConditionEnum.map((condition) => (
-                                        <SelectItem
-                                            key={condition}
-                                            value={condition}
-                                        >
-                                            {condition}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="brakeFluidColor"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Brake Fluid Color</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select brake fluid color" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {OilColorEnum.map((color) => (
-                                        <SelectItem key={color} value={color}>
-                                            {color}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="oilLeak"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Oil Leak</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select oil leak status" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {YesNoEnum.map((value) => (
-                                        <SelectItem key={value} value={value}>
-                                            {value}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="overallSummary"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Overall Summary</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Summary of the inspection..."
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="images"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Images</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(e) => {
-                                        const files = Array.from(
-                                            e.target.files || [],
-                                        ).map((file) =>
-                                            URL.createObjectURL(file),
-                                        );
-                                        field.onChange(files);
-                                    }}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </div>
     );
 }

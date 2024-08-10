@@ -37,7 +37,11 @@ const BrakeFormSchema = z.object({
     images: z.array(z.string().url()).optional(),
 });
 
-export function BrakeForm() {
+type PropTypes = {
+    active?: boolean;
+};
+
+export function BrakesForm({ active }: PropTypes) {
     const form = useForm<z.infer<typeof BrakeFormSchema>>({
         resolver: zodResolver(BrakeFormSchema),
         defaultValues: {
@@ -55,168 +59,177 @@ export function BrakeForm() {
     }
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onFormSubmit)}
-                className="space-y-6 px-2"
-            >
-                <FormField
-                    control={form.control}
-                    name="fluidLevel"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Fluid Level</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+        <div id="brake" className={active ? "" : "blur-md"}>
+            <h1 className="pb-7 text-center text-2xl font-semibold">Brakes</h1>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onFormSubmit)}
+                    className="space-y-6 px-2"
+                >
+                    <FormField
+                        control={form.control}
+                        name="fluidLevel"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Fluid Level</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select fluid level" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {FluidLevelEnum.map((level) => (
+                                            <SelectItem
+                                                key={level}
+                                                value={level}
+                                            >
+                                                {level}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="frontCondition"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Front Condition</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select front condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {ConditionEnum.map((condition) => (
+                                            <SelectItem
+                                                key={condition}
+                                                value={condition}
+                                            >
+                                                {condition}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="rearCondition"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Rear Condition</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select rear condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {ConditionEnum.map((condition) => (
+                                            <SelectItem
+                                                key={condition}
+                                                value={condition}
+                                            >
+                                                {condition}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="emergencyBrakeCondition"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Emergency Brake Condition</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select emergency brake condition" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {FluidLevelEnum.map((level) => (
+                                            <SelectItem
+                                                key={level}
+                                                value={level}
+                                            >
+                                                {level}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="overallSummary"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Overall Summary</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select fluid level" />
-                                    </SelectTrigger>
+                                    <Textarea
+                                        placeholder="Summary of the inspection..."
+                                        {...field}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    {FluidLevelEnum.map((level) => (
-                                        <SelectItem key={level} value={level}>
-                                            {level}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="frontCondition"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Front Condition</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="images"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Images</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select front condition" />
-                                    </SelectTrigger>
+                                    <Input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={(e) => {
+                                            const files = Array.from(
+                                                e.target.files || [],
+                                            ).map((file) =>
+                                                URL.createObjectURL(file),
+                                            );
+                                            field.onChange(files);
+                                        }}
+                                    />
                                 </FormControl>
-                                <SelectContent>
-                                    {ConditionEnum.map((condition) => (
-                                        <SelectItem
-                                            key={condition}
-                                            value={condition}
-                                        >
-                                            {condition}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="rearCondition"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Rear Condition</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select rear condition" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {ConditionEnum.map((condition) => (
-                                        <SelectItem
-                                            key={condition}
-                                            value={condition}
-                                        >
-                                            {condition}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="emergencyBrakeCondition"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Emergency Brake Condition</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select emergency brake condition" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {FluidLevelEnum.map((level) => (
-                                        <SelectItem key={level} value={level}>
-                                            {level}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="overallSummary"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Overall Summary</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Summary of the inspection..."
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="images"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Images</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(e) => {
-                                        const files = Array.from(
-                                            e.target.files || [],
-                                        ).map((file) =>
-                                            URL.createObjectURL(file),
-                                        );
-                                        field.onChange(files);
-                                    }}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </div>
     );
 }
