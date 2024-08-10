@@ -1,16 +1,4 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.scss";
 import Navbar from "@/components/Navbar";
-import { SessionProvider } from "next-auth/react";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "Caterpillar",
-    description:
-        "A solution for the technicians to ease their work and help then to better organize their work ",
-};
 
 export default function RootLayout({
     children,
@@ -18,9 +6,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <div className="grid grid-cols-[300px_1fr]">
             <Navbar />
-            {children}
+            <div className="px-10 py-4">{children}</div>
         </div>
     );
 }
