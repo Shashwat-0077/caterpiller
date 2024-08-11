@@ -3,21 +3,20 @@ import ImageWithFallback from "./ImageWithFallback";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
 import { InspectionForm } from "@/forms/inspectionForm";
+import { Button } from "./button";
 
 type PropType = {
-    id: number;
     name: string;
     description: string;
     image: string;
 };
 
-const TruckCard = ({ id, image, description, name }: PropType) => {
+const TruckCard = ({ image, description, name }: PropType) => {
     return (
         <div className="max-w-sm overflow-hidden rounded bg-white p-4 shadow-lg">
             <ImageWithFallback className="w-full" src={image} alt={name} />
@@ -27,15 +26,14 @@ const TruckCard = ({ id, image, description, name }: PropType) => {
                     {description}
                 </p>
                 <Dialog>
-                    <DialogTrigger>Open</DialogTrigger>
+                    <DialogTrigger className="bg-gray-900 px-5 py-3 text-white">
+                        New Inspection
+                    </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                            <DialogDescription>
-                                This action cannot be undone. This will
-                                permanently delete your account and remove your
-                                data from our servers.
-                            </DialogDescription>
+                            <DialogTitle className="pb-7 text-center text-2xl">
+                                Inspection Form
+                            </DialogTitle>
                             <InspectionForm />
                         </DialogHeader>
                     </DialogContent>

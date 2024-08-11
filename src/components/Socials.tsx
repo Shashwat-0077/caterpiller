@@ -19,13 +19,6 @@ export default function Socials() {
                 <FaGoogle className="h-5 w-5" />
                 Sign in with Google
             </div>
-            <div
-                className="flex select-none items-center gap-2 rounded-md bg-[#000] px-6 py-2 text-center text-white hover:bg-[#333]"
-                onClick={() => onSignIngClick("apple")}
-            >
-                <FaApple className="h-5 w-5" />
-                Sign in with Apple
-            </div>
         </div>
     );
 }

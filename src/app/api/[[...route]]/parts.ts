@@ -2,7 +2,7 @@ import { db } from "@/db/drizzle";
 import { Parts } from "@/db/schema";
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { unknown, z } from "zod";
+import { z } from "zod";
 import { HTTPException } from "hono/http-exception";
 import { authMiddleWare } from "./utils/authMiddleware";
 import { eq } from "drizzle-orm";

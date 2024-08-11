@@ -4,7 +4,6 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
 
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = new Hono()
@@ -15,6 +14,7 @@ const app = new Hono()
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const comments = await db.select().from(Comments);
+
         const prompt =
             "Summarize all of these comments and don't give any headings and bullet points just a normal plain text about how can i improve my services" +
             comments.map((val) => val.body).join("");

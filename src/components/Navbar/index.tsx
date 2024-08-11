@@ -4,6 +4,7 @@ import { Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import UserLogo from "./UserLogo";
+import Link from "next/link";
 
 export default function Navbar() {
     const { data: session } = useSession();
@@ -16,31 +17,36 @@ export default function Navbar() {
             <section>
                 <h1 className="text-2xl font-semibold">Trucky</h1>
                 <ul className="pt-2">
-                    <li
-                        className={`rounded-md py-2 pl-4 transition-all hover:bg-gray-200 hover:underline ${path === "/dashboard" ? "bg-yellow-100" : ""}`}
+                    <Link
+                        href={"#tires"}
+                        className={`block rounded-md py-2 pl-4 transition-all hover:cursor-pointer hover:bg-gray-200 hover:underline ${path === "/dashboard" ? "bg-yellow-100" : ""}`}
                     >
-                        Link
-                    </li>
-                    <li
-                        className={`rounded-md py-2 pl-4 transition-all hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
+                        Tires
+                    </Link>
+                    <Link
+                        href={"#battery"}
+                        className={`block rounded-md py-2 pl-4 transition-all hover:cursor-pointer hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
                     >
-                        Link
-                    </li>
-                    <li
-                        className={`rounded-md py-2 pl-4 transition-all hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
+                        Battery
+                    </Link>
+                    <Link
+                        href={"#exterior"}
+                        className={`block rounded-md py-2 pl-4 transition-all hover:cursor-pointer hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
                     >
-                        Link
-                    </li>
-                    <li
-                        className={`rounded-md py-2 pl-4 transition-all hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
+                        Exterior
+                    </Link>
+                    <Link
+                        href={"#brakes"}
+                        className={`block rounded-md py-2 pl-4 transition-all hover:cursor-pointer hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
                     >
-                        Link
-                    </li>
-                    <li
-                        className={`rounded-md py-2 pl-4 transition-all hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
+                        Brakes
+                    </Link>
+                    <Link
+                        href={"#engine"}
+                        className={`block rounded-md py-2 pl-4 transition-all hover:cursor-pointer hover:bg-gray-200 hover:underline ${path === "" ? "bg-yellow-100" : ""}`}
                     >
-                        Link
-                    </li>
+                        Engine
+                    </Link>
                 </ul>
             </section>
             <section className="flex items-center justify-between">

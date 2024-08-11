@@ -68,9 +68,9 @@ const app = new Hono<{ Variables: Variables }>()
                     .returning({ id: inspection.id });
 
                 return c.json({ message: "Inspection Created", id: entry.id });
-            } catch (error) {
+            } catch (error: any) {
                 throw new HTTPException(500, {
-                    message: "Cannot Create a new inspection",
+                    message: "Cannot Create a new inspection " + error.message,
                 });
             }
         },

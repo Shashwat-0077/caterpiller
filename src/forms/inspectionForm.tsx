@@ -73,9 +73,6 @@ export function InspectionForm() {
 
     return (
         <div id="inspection" className="space-y-6">
-            <h1 className="pb-7 text-center text-2xl font-semibold">
-                Inspection Form
-            </h1>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onFormSubmit)}
