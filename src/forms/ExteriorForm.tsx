@@ -22,6 +22,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useExteriorStore } from "@/store/ExteriorStore";
 
 // TODO : Change the file type
 const FormSchema = z
@@ -47,6 +48,8 @@ type PropTypes = {
 };
 
 export function ExteriorForm({ active }: PropTypes) {
+    const { setAllData } = useExteriorStore();
+
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -58,6 +61,11 @@ export function ExteriorForm({ active }: PropTypes) {
     });
 
     function onFormSubmit(data: z.infer<typeof FormSchema>) {
+        setAllData({
+            oilLeakSuspension: data.oilLeakSuspension,
+            overallSummary: data.overallSummary || "",
+            rustDentDamage: data.rustDentDamage,
+        });
         console.log(data);
     }
 

@@ -28,7 +28,7 @@ const app = new Hono()
                 condition: z.enum(["Y", "N"]),
                 leakRust: z.enum(["Y", "N"]),
                 overallSummary: z.string(),
-                images: z.array(z.string()),
+                images: z.array(z.string()).optional(),
             }),
         ),
         async (c) => {

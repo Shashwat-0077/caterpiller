@@ -1,4 +1,9 @@
-export const publicRoutes = ["/", "/api/comments", '"/api/comments/summarize"'];
+export const publicRoutes = [
+    "/",
+    "/api/comments",
+    "/api/comments/summarize",
+    "/api/parts/bulk-insert",
+];
 export const authRoutes = [
     "/auth/login",
     "/auth/register",

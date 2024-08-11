@@ -22,6 +22,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useTireStore } from "@/store/Tirestore";
 
 // TODO : Change the file type
 const FormSchema = z.object({
@@ -58,6 +59,7 @@ type PropTypes = {
 };
 
 export function TireForm({ active }: PropTypes) {
+    const { setAllData } = useTireStore();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -75,7 +77,17 @@ export function TireForm({ active }: PropTypes) {
     });
 
     function onFormSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data);
+        setAllData({
+            overallSummary: data.overallSummary,
+            leftFrontCondition: data.leftFrontCondition,
+            leftFrontPressure: data.leftFrontPressure,
+            leftRearCondition: data.leftRearCondition,
+            leftRearPressure: data.leftRearPressure,
+            rightFrontCondition: data.rightFrontCondition,
+            rightFrontPressure: data.rightFrontPressure,
+            rightRearCondition: data.rightFrontCondition,
+            rightRearPressure: data.rightRearPressure,
+        });
     }
 
     return (

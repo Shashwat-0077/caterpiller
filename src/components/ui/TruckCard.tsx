@@ -1,6 +1,14 @@
 import React from "react";
 import ImageWithFallback from "./ImageWithFallback";
-import Link from "next/link";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "./dialog";
+import { InspectionForm } from "@/forms/inspectionForm";
 
 type PropType = {
     id: number;
@@ -18,12 +26,20 @@ const TruckCard = ({ id, image, description, name }: PropType) => {
                 <p className="text-center text-base text-gray-700">
                     {description}
                 </p>
-                <Link
-                    href={`/dashboard/${id}`}
-                    className="mx-auto block rounded-xl bg-gray-500 px-4 py-2 text-white hover:bg-gray-700"
-                >
-                    View
-                </Link>
+                <Dialog>
+                    <DialogTrigger>Open</DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Are you absolutely sure?</DialogTitle>
+                            <DialogDescription>
+                                This action cannot be undone. This will
+                                permanently delete your account and remove your
+                                data from our servers.
+                            </DialogDescription>
+                            <InspectionForm />
+                        </DialogHeader>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     );

@@ -21,18 +21,18 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useBatteryStore } from "@/store/BattryStore";
 
 // Zod schema for the Battery form
 // TODO : Change the file type
 const BatteryFormSchema = z.object({
     make: z.string().min(1, { message: "Make is required" }),
-    replacementDate: z.string().optional(),
+    replacementDate: z.string(),
     voltage: z
         .union([z.string().transform((val) => parseFloat(val)), z.number()])
         .refine((val) => !isNaN(val), {
             message: "Voltage must be a valid number.",
-        })
-        .optional(),
+        }),
     waterLevel: z.enum(["Good", "Ok", "Low"]),
     condition: z.enum(["Y", "N"]),
     leakRust: z.enum(["Y", "N"]),
@@ -45,6 +45,7 @@ type PropType = {
 };
 
 export function BatteryForm({ active }: PropType) {
+    const { setAllData } = useBatteryStore();
     const form = useForm<z.infer<typeof BatteryFormSchema>>({
         resolver: zodResolver(BatteryFormSchema),
         defaultValues: {
@@ -60,6 +61,15 @@ export function BatteryForm({ active }: PropType) {
     });
 
     function onFormSubmit(data: z.infer<typeof BatteryFormSchema>) {
+        setAllData({
+            condition: data.condition,
+            leakRust: data.leakRust,
+            make: data.make,
+            overallSummary: data.overallSummary,
+            waterLevel: data.waterLevel,
+            replacementDate: data.replacementDate,
+            voltage: data.voltage,
+        });
         console.log(data);
     }
 

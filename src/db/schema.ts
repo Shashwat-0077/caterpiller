@@ -174,6 +174,15 @@ export const engine = pgTable("engine", {
 
 export const EngineSchema = createInsertSchema(engine);
 
+export const Parts = pgTable("parts", {
+    id: serial("id").primaryKey(),
+    name: text("name"),
+    category: text("category"),
+    price: doublePrecision("price"),
+    vehicleType: text("vehicleType"),
+});
+export const PartsSchema = createInsertSchema(Parts);
+
 export const Comments = pgTable("comments", {
     id: serial("id").primaryKey(),
     title: text("title"),

@@ -22,6 +22,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useBrakesStore } from "@/store/BrakesStore";
 
 // Enum values as per your database schema
 const FluidLevelEnum = ["Good", "Ok", "Low"] as const;
@@ -42,6 +43,8 @@ type PropTypes = {
 };
 
 export function BrakesForm({ active }: PropTypes) {
+    const { setAllData } = useBrakesStore();
+
     const form = useForm<z.infer<typeof BrakeFormSchema>>({
         resolver: zodResolver(BrakeFormSchema),
         defaultValues: {
@@ -55,6 +58,13 @@ export function BrakesForm({ active }: PropTypes) {
     });
 
     function onFormSubmit(data: z.infer<typeof BrakeFormSchema>) {
+        setAllData({
+            emergencyBrakeCondition: data.emergencyBrakeCondition,
+            fluidLevel: data.fluidLevel,
+            frontCondition: data.frontCondition,
+            overallSummary: data.overallSummary,
+            rearCondition: data.rearCondition,
+        });
         console.log(data);
     }
 

@@ -50,21 +50,24 @@ const app = new Hono<{ Variables: Variables }>()
 
                 const formattedDate = `${day}-${month}-${year}`;
 
-                await db.insert(inspection).values({
-                    catCusID: data.catCusID,
-                    customerName: data.customerName,
-                    date: formattedDate,
-                    empID: user.id,
-                    inspectorName: user.name,
-                    location: data.location,
-                    lat: data.lat,
-                    long: data.long,
-                    truckModel: data.truckModel,
-                    truckSerialNumber: data.truckSerialNumber,
-                    meterHours: data.meterHours,
-                });
+                const [entry] = await db
+                    .insert(inspection)
+                    .values({
+                        catCusID: data.catCusID,
+                        customerName: data.customerName,
+                        date: formattedDate,
+                        empID: user.id,
+                        inspectorName: user.name,
+                        location: data.location,
+                        lat: data.lat,
+                        long: data.long,
+                        truckModel: data.truckModel,
+                        truckSerialNumber: data.truckSerialNumber,
+                        meterHours: data.meterHours,
+                    })
+                    .returning({ id: inspection.id });
 
-                return c.json({ message: "Inspection Created" });
+                return c.json({ message: "Inspection Created", id: entry.id });
             } catch (error) {
                 throw new HTTPException(500, {
                     message: "Cannot Create a new inspection",

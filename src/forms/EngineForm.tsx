@@ -22,9 +22,10 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useEngineStore } from "@/store/EngineStore";
 
 // Enum values as per your database schema
-const YesNoEnum = ["Yes", "No"] as const;
+const YesNoEnum = ["Y", "N"] as const;
 const OilConditionEnum = ["Good", "Bad"] as const;
 const OilColorEnum = ["Clean", "Brown", "Black"] as const;
 
@@ -45,21 +46,31 @@ type PropTypes = {
 };
 
 export function EngineForm({ active }: PropTypes) {
+    const { setAllData } = useEngineStore();
     const form = useForm<z.infer<typeof EngineFormSchema>>({
         resolver: zodResolver(EngineFormSchema),
         defaultValues: {
-            rustDentDamage: "No",
+            rustDentDamage: "N",
             oilCondition: "Good",
             oilColor: "Brown",
             brakeFluidCondition: "Good",
             brakeFluidColor: "Brown",
-            oilLeak: "No",
+            oilLeak: "N",
             overallSummary: "",
             images: [],
         },
     });
 
     function onFormSubmit(data: z.infer<typeof EngineFormSchema>) {
+        setAllData({
+            brakeFluidColor: data.brakeFluidColor,
+            brakeFluidCondition: data.brakeFluidCondition,
+            oilColor: data.oilColor,
+            oilCondition: data.oilCondition,
+            oilLeak: data.oilLeak,
+            overallSummary: data.overallSummary,
+            rustDentDamage: data.rustDentDamage,
+        });
         console.log(data);
     }
 
@@ -92,7 +103,7 @@ export function EngineForm({ active }: PropTypes) {
                                                 key={value}
                                                 value={value}
                                             >
-                                                {value}
+                                                {value === "N" ? "No" : "Yes"}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
@@ -242,7 +253,7 @@ export function EngineForm({ active }: PropTypes) {
                                                 key={value}
                                                 value={value}
                                             >
-                                                {value}
+                                                {value === "N" ? "No" : "Yes"}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>

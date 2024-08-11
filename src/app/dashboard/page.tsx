@@ -1,7 +1,8 @@
+"use client";
 // import { auth } from "@/auth";
 import TruckCard from "@/components/ui/TruckCard";
 
-export default async function Dashboard() {
+export default function Dashboard() {
     // const session = await auth();
 
     return (

@@ -34,12 +34,13 @@ const app = new Hono()
                 leftRearCondition: z.enum(["Good", "Ok", "Needs Replacement"]),
                 rightRearCondition: z.enum(["Good", "Ok", "Needs Replacement"]),
                 overallSummary: z.string(),
-                images: z.array(z.string()),
+                images: z.array(z.string()).optional(),
             }),
         ),
         async (c) => {
             try {
                 const data = c.req.valid("json");
+                console.log(data);
 
                 await db.insert(tires).values({
                     inspectionID: data.inspectionID,
@@ -58,7 +59,7 @@ const app = new Hono()
                 return c.json({ message: "Tire Record Created" });
             } catch (error) {
                 throw new HTTPException(500, {
-                    message: "Cannot Create a new tire record",
+                    message: "Cannot Create a new tire record ",
                 });
             }
         },

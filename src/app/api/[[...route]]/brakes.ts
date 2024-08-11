@@ -28,7 +28,7 @@ const app = new Hono()
                 rearCondition: z.enum(["Good", "Ok", "Needs Replacement"]), // ConditionEnum
                 emergencyBrakeCondition: z.enum(["Good", "Ok", "Low"]), // FluidLevelEnum
                 overallSummary: z.string(),
-                images: z.array(z.string()),
+                images: z.array(z.string()).optional(),
             }),
         ),
         async (c) => {
